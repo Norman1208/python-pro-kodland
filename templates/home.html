@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Beranda — Web Kuis AI{% endblock %}
+{% block content %}
+<h1>Selamat datang di Web Kuis AI untuk Remaja!</h1>
+
+<section id="weatherSection">
+  <h2>Prakiraan Cuaca 3 Hari</h2>
+  <label>Masukkan nama kota: <input type="text" id="cityInput" placeholder="Jakarta"></label>
+  <button id="getWeatherBtn">Tampilkan Cuaca</button>
+
+  <div id="weatherResult">
+    <!-- tabel akan diisi oleh JS -->
+  </div>
+</section>
+
+<section>
+  <h2>Tentang Kuis</h2>
+  <p>Kuis ini menguji pengetahuan topik: AI, Visi Komputer, NLP dan penerapan model di Python. Cocok untuk remaja yang ingin belajar cepat.</p>
+</section>
+{% endblock %}

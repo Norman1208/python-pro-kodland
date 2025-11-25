@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Daftar</h2>
+<form id="registerForm">
+  <label>Username: <input name="username" required></label><br/>
+  <label>Nama Panggilan: <input name="display_name"></label><br/>
+  <label>Password: <input name="password" type="password" required></label><br/>
+  <label>Konfirmasi Password: <input name="confirm" type="password" required></label><br/>
+  <button type="submit">Daftar</button>
+</form>
+<div id="registerMsg"></div>
+{% endblock %}
