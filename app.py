@@ -33,6 +33,11 @@ class User(db.Model, UserMixin):
     best_score = db.Column(db.Float, default=0.0)   # skor terbaik dalam %
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def __init__(self, username: str, display_name: str, **kwargs):
+        super().__init__(**kwargs)
+        self.username = username
+        self.display_name = display_name
+
     def set_password(self, pw):
         self.password_hash = generate_password_hash(pw)
 
@@ -60,6 +65,14 @@ class Attempt(db.Model):
     score_pct = db.Column(db.Float, default=0.0)   # 0–100
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def __init__(self, user_id: int, total_questions: int = 5,
+                 correct_answers: int = 0, score_pct: float = 0.0, **kwargs):
+        super().__init__(**kwargs)
+        self.user_id = user_id
+        self.total_questions = total_questions
+        self.correct_answers = correct_answers
+        self.score_pct = score_pct
+
 class ImageDetection(db.Model):
     """Hasil deteksi gambar yang disimpan ke DB."""
     id = db.Column(db.Integer, primary_key=True)
@@ -67,6 +80,12 @@ class ImageDetection(db.Model):
     predicted_class = db.Column(db.String(100), nullable=False)
     confidence = db.Column(db.Float, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __init__(self, user_id: int, predicted_class: str, confidence: float, **kwargs):
+        super().__init__(**kwargs)
+        self.user_id = user_id
+        self.predicted_class = predicted_class
+        self.confidence = confidence
 
 @login_manager.user_loader
 def load_user(user_id):
