@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Deteksi Gambar — Web Kuis AI{% endblock %}
+{% block content %}
+
+<div class="page-hero">
+  <h1>🔍 Deteksi Gambar AI</h1>
+  <p class="hero-sub">Upload gambar — AI akan mengklasifikasikan objek di dalamnya secara real-time</p>
+</div>
+
+<div class="detect-layout">
+
+  <!-- ── Panel Kiri: Upload + Preview ── -->
+  <div class="detect-panel">
+    <div class="panel-card">
+      <h2>📤 Upload Gambar</h2>
+
+      <!-- Model URL input -->
+      <div class="model-url-box">
+        <label for="modelUrlInput">🔗 URL Model Teachable Machine</label>
+        <div class="input-row">
+          <input type="text" id="modelUrlInput"
+            placeholder="https://teachablemachine.withgoogle.com/models/..."
+            value="https://teachablemachine.withgoogle.com/models/DKnD6PAJE/"
+          />
+          <button class="btn-secondary" id="loadModelBtn">Muat Model</button>
+        </div>
+        <p id="modelStatus" class="status-msg">⏳ Klik "Muat Model" untuk memulai</p>
+      </div>
+
+      <!-- Image upload -->
+      <div class="upload-area" id="uploadArea">
+        <input type="file" id="imageInput" accept="image/*" hidden/>
+        <div class="upload-placeholder" id="uploadPlaceholder">
+          <span class="upload-icon">🖼️</span>
+          <p>Klik atau seret gambar ke sini</p>
+          <small>Format: JPG, PNG, WEBP</small>
+        </div>
+        <img id="previewImg" class="preview-img hidden" alt="preview"/>
+      </div>
+
+      <div class="detect-actions">
+        <button class="btn-secondary" id="chooseFileBtn">📂 Pilih File</button>
+        <button class="btn-primary" id="classifyBtn" disabled>🔍 Klasifikasi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Panel Kanan: Hasil + Riwayat ── -->
+  <div class="detect-panel">
+
+    <!-- Hasil deteksi -->
+    <div class="panel-card">
+      <h2>📊 Hasil Deteksi</h2>
+      <div id="detectResult" class="detect-result-box">
+        <p class="result-placeholder">Hasil deteksi akan muncul di sini setelah kamu meng-upload dan mengklasifikasi gambar.</p>
+      </div>
+      <button class="btn-primary" id="saveDetectBtn" disabled>💾 Simpan Hasil ke Database</button>
+      <p id="saveMsg" class="status-msg"></p>
+    </div>
+
+    <!-- Riwayat deteksi -->
+    <div class="panel-card">
+      <h2>🕐 Riwayat Deteksi Saya</h2>
+      <div id="detectHistory" class="detect-history">
+        <p class="result-placeholder">Belum ada riwayat deteksi.</p>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /detect-layout -->
+
+{% endblock %}
+
+{% block scripts %}
+<!-- TensorFlow.js + Teachable Machine -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<script src="{{ url_for('static', filename='detect.js') }}"></script>
+{% endblock %}

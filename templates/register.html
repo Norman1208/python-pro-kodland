@@ -1,12 +1,30 @@
 {% extends "base.html" %}
+{% block title %}Daftar — Web Kuis AI{% endblock %}
 {% block content %}
-<h2>Daftar</h2>
-<form id="registerForm">
-  <label>Username: <input name="username" required></label><br/>
-  <label>Nama Panggilan: <input name="display_name"></label><br/>
-  <label>Password: <input name="password" type="password" required></label><br/>
-  <label>Konfirmasi Password: <input name="confirm" type="password" required></label><br/>
-  <button type="submit">Daftar</button>
-</form>
-<div id="registerMsg"></div>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>🚀 Daftar Akun</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="regUsername">Username <small>(untuk login)</small></label>
+        <input id="regUsername" name="username" type="text" required placeholder="contoh: budi123"/>
+      </div>
+      <div class="form-group">
+        <label for="regDisplayName">Nama Panggilan <small>(tampil di leaderboard)</small></label>
+        <input id="regDisplayName" name="display_name" type="text" placeholder="contoh: Budi Santoso"/>
+      </div>
+      <div class="form-group">
+        <label for="regPassword">Password</label>
+        <input id="regPassword" name="password" type="password" required placeholder="minimal 6 karakter"/>
+      </div>
+      <div class="form-group">
+        <label for="regConfirm">Konfirmasi Password</label>
+        <input id="regConfirm" name="confirm" type="password" required placeholder="ulangi password"/>
+      </div>
+      <button class="btn-primary" type="submit" style="width:100%;margin-top:8px">Daftar Sekarang</button>
+    </form>
+    <div id="registerMsg" class="form-msg"></div>
+    <p class="auth-link">Sudah punya akun? <a href="/login">Masuk</a></p>
+  </div>
+</div>
 {% endblock %}

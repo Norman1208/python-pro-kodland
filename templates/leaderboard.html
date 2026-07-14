@@ -1,8 +1,26 @@
 {% extends "base.html" %}
+{% block title %}Papan Peringkat — Web Kuis AI{% endblock %}
 {% block content %}
-<h2>Papan Peringkat</h2>
-<table id="leaderboardTable">
-  <thead><tr><th>Rank</th><th>Nama</th><th>Username</th><th>Skor</th></tr></thead>
-  <tbody></tbody>
-</table>
+
+<div class="page-hero">
+  <h1>🏆 Papan Peringkat</h1>
+  <p class="hero-sub">Top 50 pengguna berdasarkan skor terbaik mereka</p>
+</div>
+
+<div class="leaderboard-container">
+  <table id="leaderboardTable" class="leaderboard-table">
+    <thead>
+      <tr>
+        <th>Peringkat</th>
+        <th>Nama</th>
+        <th>Username</th>
+        <th>Skor Terbaik</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="4" class="loading-row">⏳ Memuat data...</td></tr>
+    </tbody>
+  </table>
+</div>
+
 {% endblock %}

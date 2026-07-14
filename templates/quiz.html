@@ -1,11 +1,82 @@
 {% extends "base.html" %}
+{% block title %}Kuis — Web Kuis AI{% endblock %}
 {% block content %}
-<h2>Kuis</h2>
-<div id="scoreBox">Skor Anda: <span id="scoreVal">0</span></div>
-<div id="questionArea">
-  <button id="nextQBtn">Minta Pertanyaan</button>
-  <div id="questionText"></div>
-  <div id="choices"></div>
-  <div id="result"></div>
+
+<div class="page-hero">
+  <h1>📝 Kuis AI</h1>
+  <p class="hero-sub">5 soal acak dari kategori NLP, Computer Vision, Discord.py, dan Flask</p>
 </div>
+
+<!-- Panel utama kuis -->
+<div class="quiz-container" id="quizContainer">
+
+  <!-- ── Layar Mulai ── -->
+  <div id="screenStart" class="quiz-screen active">
+    <div class="quiz-start-card">
+      <div class="quiz-icon">🎯</div>
+      <h2>Siap Mengerjakan Kuis?</h2>
+      <p>Kamu akan mendapat <strong>5 soal acak</strong> dan harus menjawab semuanya sebelum melihat hasil.</p>
+      <ul class="quiz-rules">
+        <li>✅ Pilih satu jawaban per soal</li>
+        <li>✅ Navigasi dengan tombol Next / Prev</li>
+        <li>✅ Submit semua di akhir untuk melihat skor</li>
+        <li>🏆 Skor terbaik kamu akan disimpan</li>
+      </ul>
+      <button class="btn-primary btn-lg" id="startQuizBtn">Mulai Kuis</button>
+    </div>
+  </div>
+
+  <!-- ── Layar Soal ── -->
+  <div id="screenQuiz" class="quiz-screen">
+    <div class="quiz-progress-bar">
+      <div id="progressFill" class="progress-fill"></div>
+    </div>
+    <div class="quiz-status">
+      <span id="questionCounter" class="q-counter">Soal 1 / 5</span>
+      <span id="categoryBadge" class="cat-badge"></span>
+    </div>
+
+    <div class="question-card">
+      <p id="questionText" class="question-text"></p>
+      <div id="choicesList" class="choices-list"></div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-secondary" id="prevBtn" disabled>← Sebelumnya</button>
+      <span id="answeredCount" class="answered-count">0 / 5 dijawab</span>
+      <button class="btn-secondary" id="nextBtn">Berikutnya →</button>
+    </div>
+    <div class="quiz-submit-row">
+      <button class="btn-primary" id="submitQuizBtn" disabled>Submit Jawaban</button>
+      <small id="submitHint" class="submit-hint">Jawab semua soal sebelum submit</small>
+    </div>
+  </div>
+
+  <!-- ── Layar Hasil ── -->
+  <div id="screenResult" class="quiz-screen">
+    <div class="result-card">
+      <div id="resultEmoji" class="result-emoji">🎉</div>
+      <h2 id="resultTitle">Hasil Kuis</h2>
+      <div class="result-score-big">
+        <span id="resultPct">0%</span>
+      </div>
+      <p id="resultDetail" class="result-detail"></p>
+      <div id="newBestBanner" class="new-best-banner hidden">🏆 Rekor Baru! Skor Terbaik Kamu!</div>
+      <div id="prevBestInfo" class="prev-best-info"></div>
+
+      <div id="reviewSection" class="review-section">
+        <h3>📋 Review Jawaban</h3>
+        <div id="reviewList"></div>
+      </div>
+
+      <button class="btn-primary btn-lg" id="retryBtn">Coba Lagi</button>
+    </div>
+  </div>
+
+</div><!-- /quiz-container -->
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='main.js') }}"></script>
 {% endblock %}

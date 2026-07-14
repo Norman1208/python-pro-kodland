@@ -1,20 +1,67 @@
 {% extends "base.html" %}
 {% block title %}Beranda — Web Kuis AI{% endblock %}
 {% block content %}
-<h1>Selamat datang di Web Kuis AI untuk Remaja!</h1>
 
-<section id="weatherSection">
-  <h2>Prakiraan Cuaca 3 Hari</h2>
-  <label>Masukkan nama kota: <input type="text" id="cityInput" placeholder="Jakarta"></label>
-  <button id="getWeatherBtn">Tampilkan Cuaca</button>
+<div class="hero-banner">
+  <div class="hero-content">
+    <h1>Selamat Datang di<br><span class="gradient-text">Web Kuis AI</span> 🤖</h1>
+    <p class="hero-desc">Platform kuis interaktif bertopik AI, Computer Vision, NLP, Discord.py, dan Flask. Cocok untuk remaja yang ingin belajar lebih cepat!</p>
+    {% if current_user.is_authenticated %}
+      <a class="btn-primary btn-lg" href="{{ url_for('quiz_page') }}">Mulai Kuis Sekarang 🎯</a>
+      <a class="btn-secondary btn-lg" href="{{ url_for('detect_page') }}">Coba Deteksi Gambar 🔍</a>
+    {% else %}
+      <a class="btn-primary btn-lg" href="{{ url_for('register') }}">Daftar Gratis</a>
+      <a class="btn-secondary btn-lg" href="{{ url_for('login') }}">Masuk</a>
+    {% endif %}
+  </div>
+</div>
 
-  <div id="weatherResult">
-    <!-- tabel akan diisi oleh JS -->
+<!-- Fitur Unggulan -->
+<section class="features-section">
+  <h2 class="section-title">Apa yang Bisa Kamu Lakukan?</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <h3>Kuis Interaktif</h3>
+      <p>5 soal acak per sesi dari 4 topik AI. Lihat skor & bandingkan rekormu!</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3>Deteksi Gambar AI</h3>
+      <p>Upload foto dan lihat AI mengklasifikasikan objek menggunakan Teachable Machine.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <h3>Papan Peringkat</h3>
+      <p>Bersaing dengan teman dan lihat siapa yang punya skor terbaik!</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌤️</div>
+      <h3>Prakiraan Cuaca</h3>
+      <p>Lihat prediksi cuaca 3 hari ke depan untuk kota manapun.</p>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2>Tentang Kuis</h2>
-  <p>Kuis ini menguji pengetahuan topik: AI, Visi Komputer, NLP dan penerapan model di Python. Cocok untuk remaja yang ingin belajar cepat.</p>
+<!-- Topik Kuis -->
+<section class="topics-section">
+  <h2 class="section-title">Topik yang Diujikan</h2>
+  <div class="topics-grid">
+    <div class="topic-pill nlp">🧠 NLP</div>
+    <div class="topic-pill cv">👁️ Computer Vision</div>
+    <div class="topic-pill discord">🤖 Discord.py</div>
+    <div class="topic-pill flask">🌐 Flask</div>
+  </div>
 </section>
+
+<!-- Cuaca -->
+<section class="weather-section">
+  <h2 class="section-title">🌤️ Prakiraan Cuaca 3 Hari</h2>
+  <div class="weather-search">
+    <input type="text" id="cityInput" placeholder="Masukkan nama kota (mis. Jakarta)"/>
+    <button class="btn-primary" id="getWeatherBtn">Tampilkan</button>
+  </div>
+  <div id="weatherResult" class="weather-result"></div>
+</section>
+
 {% endblock %}
