@@ -50,11 +50,22 @@ class Question(db.Model):
     category = db.Column(db.String(80), default='general')
     choices = db.relationship('Choice', backref='question', lazy=True)
 
+    def __init__(self, text: str, category: str = 'general', **kwargs):
+        super().__init__(**kwargs)
+        self.text = text
+        self.category = category
+
 class Choice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     text = db.Column(db.String(256), nullable=False)
     is_correct = db.Column(db.Boolean, default=False)
+
+    def __init__(self, question_id: int, text: str, is_correct: bool = False, **kwargs):
+        super().__init__(**kwargs)
+        self.question_id = question_id
+        self.text = text
+        self.is_correct = is_correct
 
 class Attempt(db.Model):
     """Satu percobaan ujian (5 soal)."""
